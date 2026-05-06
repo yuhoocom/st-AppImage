@@ -18,12 +18,8 @@ cd /tmp/st-src
 git checkout "$(git describe --tags --abbrev=0 2>/dev/null || echo master)"
 
 cp config.def.h config.h
-
-# 启用 OSC 52 剪贴板（默认被安全策略关闭）
 sed -i 's|int allowwindowops = 0;|int allowwindowops = 1;|' config.h
-
-# GoMono Nerd Font Mono, pixelsize=32 适配 4K 无缩放
-sed -i 's|static char \*font = .*|static char *font = "GoMono Nerd Font Mono:pixelsize=32:antialias=true:autohint=true";|' config.h
+sed -i 's|pixelsize=12|pixelsize=32|' config.h
 
 make clean
 make PREFIX=/usr

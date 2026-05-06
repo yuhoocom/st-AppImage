@@ -14,13 +14,5 @@ export DEPLOY_VULKAN=0
 export ANYLINUX_LIB=1
 
 quick-sharun /usr/bin/st
-
-# 打包字体到 AppDir
-FONTDIR=./AppDir/shared/share/fonts/GoMono
-mkdir -p "$FONTDIR"
-cp ./fonts/*.ttf "$FONTDIR"/
-fc-cache -fv "$FONTDIR" 2>/dev/null || true
-echo "Bundled fonts:" && ls -la "$FONTDIR"/
-
 quick-sharun --make-appimage
 quick-sharun --test ./dist/*.AppImage
