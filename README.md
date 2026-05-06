@@ -16,6 +16,13 @@
 | [Click here](https://github.com/pkgforge-dev/st-AppImage/releases/latest) | [Click here](https://st.suckless.org) |
 
 </div>
+---
+# Custom
+[-] `allowwindowops = 0`
+[+] `allowwindowops = 1`
+[-] `pixelsize=12`
+[+] `pixelsize=32`
+[+] `togglefullscreen()` + `F11/Alt+Enter`
 
 ---
 
