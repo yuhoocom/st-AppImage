@@ -17,11 +17,17 @@
 
 </div>
 ---
+
 # Custom
+
 [-] `allowwindowops = 0`
+
 [+] `allowwindowops = 1`
+
 [-] `pixelsize=12`
+
 [+] `pixelsize=32`
+
 [+] `togglefullscreen()` + `F11/Alt+Enter`
 
 ---
