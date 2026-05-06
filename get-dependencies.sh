@@ -1,26 +1,34 @@
 #!/bin/sh
-
 set -eu
 
-ARCH=$(uname -m)
-
-echo "Installing package dependencies..."
+echo "Installing build dependencies..."
 echo "---------------------------------------------------------------"
-# pacman -Syu --noconfirm PACKAGESHERE
+pacman -Syu --noconfirm base-devel libx11 libxft fontconfig freetype2 \
+    ncurses pkg-config git
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano
 
-# Comment this out if you need an AUR package
-make-aur-package --chaotic-aur st
+echo "Building st from source..."
+echo "---------------------------------------------------------------"
 
-# If the application needs to be manually built that has to be done down here
+git clone https://git.suckless.org/st /tmp/st-src
+cd /tmp/st-src
+git checkout "$(git describe --tags --abbrev=0 2>/dev/null || echo master)"
 
-# if you also have to make nightly releases check for DEVEL_RELEASE = 1
-#
-# if [ "${DEVEL_RELEASE-}" = 1 ]; then
-# 	nightly build steps
-# else
-# 	regular build steps
-# fi
+cp config.def.h config.h
+
+# 启用 OSC 52 剪贴板（默认被安全策略关闭）
+sed -i 's|int allowwindowops = 0;|int allowwindowops = 1;|' config.h
+
+# GoMono Nerd Font Mono, pixelsize=32 适配 4K 无缩放
+sed -i 's|static char \*font = .*|static char *font = "GoMono Nerd Font Mono:pixelsize=32:antialias=true:autohint=true";|' config.h
+
+make clean
+make PREFIX=/usr
+make PREFIX=/usr install
+tic -sx st.info
+
+cd /
+rm -rf /tmp/st-src
