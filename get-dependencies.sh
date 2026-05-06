@@ -31,7 +31,7 @@ patch -p1 < /tmp/st-gruvbox-dark.diff \
   || { echo "FATAL: gruvbox patch failed"; exit 1; }
 
 # ── add scrollback patch (Shift + PageUp / PageDown) ──
-curl -fsSL "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.5.diff" \
+curl -fsSL "https://st.suckless.org/patches/scrollback/st-scrollback-0.9.2.diff" \
   -o /tmp/st-scrollback.diff
 patch -p1 < /tmp/st-scrollback.diff \
   || { echo "FATAL: scrollback patch failed"; exit 1; }
