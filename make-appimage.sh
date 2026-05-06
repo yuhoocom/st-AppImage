@@ -12,7 +12,6 @@ export ICON=https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-ico
 export DEPLOY_OPENGL=0
 export DEPLOY_VULKAN=0
 export ANYLINUX_LIB=1
-export URUNTIME_PRELOAD=1
 
 quick-sharun /usr/bin/st
 
