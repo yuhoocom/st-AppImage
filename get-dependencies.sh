@@ -30,31 +30,35 @@ curl -fsSL "https://st.suckless.org/patches/gruvbox/st-gruvbox-dark-0.8.5.diff" 
 patch -p1 < /tmp/st-gruvbox-dark.diff \
   || { echo "FATAL: gruvbox patch failed"; exit 1; }
 
-# PENDING...
+# PENDING/
 # ── add scrollback patch (Shift + PageUp / PageDown) ──
 # curl -fsSL "https://st.suckless.org/patches/scrollback/st-scrollback-0.9.2.diff" \
 #   -o /tmp/st-scrollback.diff
 # patch -p1 < /tmp/st-scrollback.diff \
 #   || { echo "FATAL: scrollback patch failed"; exit 1; }
+# /PENDING
 # ---------------------------------------------------------------------------
 
 cp config.def.h config.h
 sed -i 's|int allowwindowops = 0;|int allowwindowops = 1;|' config.h
 sed -i 's|pixelsize=12|pixelsize=32|' config.h
 
-# PENDING
+# PENDING/
 # --- add scrollback keybind ---
 # grep -q kscrollup config.h || sed -i '/static Shortcut shortcuts\[\] = {/a\
 # \t{ ShiftMask, XK_Page_Up,   kscrollup,   {.i = -1} },\
 # \t{ ShiftMask, XK_Page_Down, kscrolldown, {.i = -1} },' config.h
+# /PENDING
 
 # ── verify changes ──
 grep 'allowwindowops = 1' config.h \
   || { echo "FATAL: allowwindowops sed failed"; exit 1; }
 grep 'pixelsize=32' config.h \
   || { echo "FATAL: pixelsize sed failed"; exit 1; }
-grep 'kscrollup' config.h \
-  || { echo "FATAL: scrollback keybind missing"; exit 1; }
+# PENDING/
+# grep 'kscrollup' config.h \
+#   || { echo "FATAL: scrollback keybind missing"; exit 1; }
+# /PENDING
 
 make clean
 make PREFIX=/usr
